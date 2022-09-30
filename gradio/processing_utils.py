@@ -90,7 +90,8 @@ def encode_plot_to_base64(plt):
 
 
 def download_to_file(url, dir=None):
-    file_suffix = os.path.splitext(url)[1]
+    without_query = url.split("?")[0]
+    file_suffix = os.path.splitext(without_query)[1]
     file_obj = tempfile.NamedTemporaryFile(delete=False, suffix=file_suffix, dir=dir)
     with requests.get(url, stream=True) as r:
         with open(file_obj.name, "wb") as f:
